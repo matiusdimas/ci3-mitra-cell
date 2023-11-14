@@ -91,6 +91,20 @@ function activeNavbar($name, $active_navbar)
                                 <span>Kategori</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="<?= base_url('dashboard/supplier') ?>"
+                                class="nav-link px-3 <?= activeNavbar('supplier', $active_navbar) ?>">
+                                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                <span>Supplier</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('dashboard/beli') ?>"
+                                class="nav-link px-3 <?= activeNavbar('beli', $active_navbar) ?>">
+                                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                <span>Beli</span>
+                            </a>
+                        </li>
                     <?php } ?>
 
                     <li>
