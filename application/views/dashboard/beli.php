@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <h4>Jual</h4>
+                <h4>Beli</h4>
             </div>
         </div>
         <?php if (validation_errors()) { ?>
@@ -12,56 +12,75 @@
             </div>
         <?php } ?>
         <?= $this->session->flashdata('pesan') ?>
-        <div id="pesan" class="alert alert-danger alert-dismissible text-center fade show d-none" role="alert">
-            <div>Barang Tersebut Sudah ada Di Table</div>
+        <div id="pesanSupplier" class="alert alert-danger alert-dismissible text-center fade show d-none" role="alert">
+            <div>Kode Supplier Tidak Boleh Beda</div>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <div class="mb-3">
-            <div class="col-2">
-                <div>
-                    <label for="myInput">Cari Kode Barang</label>
-                    <input id="myInput" type="text" placeholder="Ex = BR-IP20" class="form-control mb-1">
-                </div>
-                <div class="position-relative">
-                    <ul id="myList" class="list-group position-absolute border">
-                        <?php foreach ($barang as $b) { ?>
-                            <button class="list-group-item list-group-item-action d-none"><?= $b['kode'] ?></button>
-                        <?php } ?>
-                    </ul>
-                </div>
-            </div>
+        <div id="pesanBarang" class="alert alert-danger alert-dismissible text-center fade show d-none" role="alert">
+            <div>Kode Barang Sudah Ada Di Table</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="my-3">
             <div>
                 <div class="row g-3">
-                    <div class="col-auto col-md-2">
-                        <label for="kode">Kode</label>
-                        <input type="text" class="form-control" value="" readonly id="kode">
+                    <div class="btn-group col-auto col-md-2">
+                        <div class="d-grid">
+                            <label for="supplierButton">Cari Supplier</label>
+                            <button class="btn border dropdown-toggle" type="button" id="supplierButton"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Pilih Supplier
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="supplierButton">
+                                <li class="mx-2"><input type="text" class="form-control" id="supplierFilter"
+                                        placeholder="Cari Kode">
+                                </li>
+                                <?php foreach ($supplier as $s) { ?>
+                                    <li class="dropdown-item supplierItem"><?= $s['kode'] . ' | ' . $s['nama'] ?></li>
+                                <?php } ?>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-auto col-md-2">
-                        <label for="nama_barang">Nama Barang</label>
-                        <input type="text" class="form-control" id="nama_barang" readonly>
-                    </div>
-                    <div class="col-auto col-md-2">
-                        <label for="harpok">Harpok Barang</label>
-                        <input type="text" class="form-control" id="harpok" readonly>
-                    </div>
-                    <div class="col-auto col-md-2">
-                        <label for="harjul">Harjul Barang</label>
-                        <input type="text" class="form-control" id="harjul" readonly>
-                    </div>
-                    <div class="col-auto col-md-2">
-                        <label for="stok">Stok</label>
-                        <input type="text" class="form-control" id="stok" readonly>
+                    <div class="btn-group col-auto col-md-2">
+                        <div class="d-grid">
+                            <label for="barangButton">Cari Barang</label>
+                            <button class="btn border dropdown-toggle" type="button" id="barangButton"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Pilih Barang
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="barangButton">
+                                <li class="mx-2"><input type="text" class="form-control" id="barangFilter"
+                                        placeholder="Cari Kode">
+                                </li>
+                                <?php foreach ($barang as $s) { ?>
+                                    <li class="dropdown-item barangItem"><?= $s['kode'] . ' | ' . $s['nama'] ?></li>
+                                <?php } ?>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="row g-3">
                     <div class="col-auto col-md-2">
-                        <label for="qty">Qty</label>
-                        <input type="number" class="form-control" id="qty" value="1">
+                        <label for="kodeSupplier">Kode Supplier</label>
+                        <input type="text" class="form-control" value="" readonly id="kodeSupplier">
                     </div>
                     <div class="col-auto col-md-2">
-                        <label for="diskon">diskon (%)</label>
-                        <input type="number" class="form-control" id="diskon" value="0">
+                        <label for="kodeBarang">Kode Barang</label>
+                        <input type="text" class="form-control" value="" readonly id="kodeBarang">
                     </div>
+                    <div class="col-auto col-md-2">
+                        <label for="namaBarang">Nama Barang</label>
+                        <input type="text" class="form-control" id="namaBarang" readonly>
+                    </div>
+                    <div class="col-auto col-md-2">
+                        <label for="harga">Harga Barang</label>
+                        <input type="text" class="form-control" id="harga">
+                    </div>
+                    <div class="col-auto col-md-2">
+                        <label for="jumlah">Jumlah</label>
+                        <input type="number" class="form-control" id="jumlah">
+                    </div>
+                </div>
+                <div class="row g-3">
                     <div class="col-auto col-md-2">
                         <label for="total">total</label>
                         <input type="text" class="form-control" id="total" readonly>
@@ -72,22 +91,21 @@
                 </div>
             </div>
         </div>
-        <form action="<?= base_url('dashboard/addJual') ?>" method="post">
+        <form action="<?= base_url('dashboard/addBeli') ?>" method="post">
             <div class="card">
                 <div class="card-header">
-                    <span><i class="bi bi-table me-2"></i></span> Data Jual
+                    <span><i class="bi bi-table me-2"></i></span> Data Beli
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example" class="table table-striped " style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th>Kode</th>
+                                    <th>Kode Supplier</th>
+                                    <th>Kode Barang</th>
                                     <th>Nama Barang</th>
-                                    <th>Harga Pokok</th>
-                                    <th>Harga Jual</th>
-                                    <th>Qty</th>
-                                    <th>Diskon</th>
+                                    <th>Harga Barang</th>
+                                    <th>Jumlah</th>
                                     <th>Total</th>
                                     <th>Opsi</th>
                                 </tr>
@@ -115,33 +133,17 @@
                         </div>
                         <div>
                             <div class="col-auto">
-                                <label for="jumlah_uang" class="col-form-label">Jumlah Uang</label>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="col-auto">
-                                <label for="kembalian" class="col-form-label">Kembalian</label>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="col-auto">
                                 <label></label>
                             </div>
                         </div>
                     </div>
                     <div class="d-grid gap-2">
                         <div class="col-auto">
-                            <input type="text" id="total_harga" name="total_harga" class="form-control" readonly
-                                value="0" />
-                        </div>
-                        <div class=" col-auto">
-                            <input type="text" value="Rp. " id="jumlah_uang" name="jumlah_uang" class="form-control">
+                            <input type="text" id="intTotalHarga" name="intTotalHarga" hidden value='' />
+                            <input type="text" id="totalHarga" class="form-control" readonly value="0" />
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="kembalian" name="kembalian" class="form-control" readonly value="0">
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn btn-primary" type="submit">Cetak</button>
+                            <button class="btn btn-primary" type="submit">Simpan</button>
                         </div>
                     </div>
                 </div>
@@ -150,6 +152,7 @@
     </div>
 </main>
 <script>
-    var barangData = <?php echo json_encode($barang); ?>
+    var barangData = <?php echo json_encode($barang); ?>;
+    var supplierData = <?php echo json_encode($supplier); ?>;
 </script>
-<script src="<?= base_url('assets/js/dashboard/jual.js') ?>"></script>
+<script src="<?= base_url('assets/js/dashboard/beli.js') ?>"></script>

@@ -36,21 +36,6 @@
                                 id="nama_barang" name="nama_barang" placeholder="Masukkan Barang">
                         </div>
                         <div class="mb-3">
-                            <label for="harpok" class="form-label">Harga Pokok</label>
-                            <input required value="<?= set_value('harpok'); ?>" type="text" class="form-control"
-                                id="harpok" name="harpok" placeholder="Masukkan Harpok">
-                        </div>
-                        <div class="mb-3">
-                            <label for="harjul" class="form-label">Harga Jual</label>
-                            <input required value="<?= set_value('harjul'); ?>" type="text" class="form-control"
-                                id="harjul" name="harjul" placeholder="Masukkan Harjul">
-                        </div>
-                        <div class="mb-3">
-                            <label for="stok" class="form-label">Stok</label>
-                            <input required value="<?= set_value('stok'); ?>" type="text" class="form-control" id="stok"
-                                name="stok" placeholder="Masukkan Stok">
-                        </div>
-                        <div class="mb-3">
                             <label for="kategori" class="form-label">Pilih Kategori</label>
                             <select id="kategori" class="form-select" aria-label="Default select example"
                                 name="id_kategori">
@@ -123,7 +108,6 @@
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <input type="text" name="id" hidden value="<?= $b['id'] ?>">
                                                         <input type="text" name="kode-old" hidden value="<?= $b['kode'] ?>">
                                                         <input type="text" name="nama-old" hidden value="<?= $b['nama'] ?>">
                                                         <div class="mb-3">
@@ -191,7 +175,7 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-bs-dismiss="modal">Close</button>
-                                                        <a href="<?= base_url('dashboard/deleteBarang/' . $b['id']) ?>"
+                                                        <a href="<?= base_url('dashboard/deleteBarang/' . $b['kode']) ?>"
                                                             type="button" class="btn btn-primary">Delete</a>
                                                     </div>
                                                 </div>

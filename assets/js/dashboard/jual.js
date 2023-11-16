@@ -4,7 +4,8 @@ const hitungTotalHarga = () => {
         let hargaBarang = parseFloat($(this).find('td[data-field="total"]').text().replace(/[^0-9,-]+/g, "").replace(',', '.'));
         totalHarga += hargaBarang
     });
-    $('#total_harga').val(formattedTotal(totalHarga)); // Update elemen input total
+    $('#intTotalHarga').val(totalHarga);
+    $('#totalHarga').val(formattedTotal(totalHarga));
 }
 const formattedTotal = (total) => {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(total / 1);
@@ -13,54 +14,45 @@ const toNumber = (total) => {
     return parseFloat(total.replace(/[^0-9,-]+/g, "").replace(',', '.'));
 }
 $(document).ready(function () {
-    $("#jumlah_uang").on("keyup", function () {
+    // barang filter
+    $("#barangFilter").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $(".barangItem").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    $(".barangItem").on("click", function () {
+        var selectedText = $(this).text();
+        var kode = selectedText.split('|')[0].trim();
+        var selectedBarang = barangData.find(function (barang) {
+            return barang.kode === kode;
+        });
+        if (selectedBarang) {
+            $('#kode').val(selectedBarang.kode);
+            $('#namaBarang').val(selectedBarang.nama);
+            $('#jumlah').val(1);
+            $('#harpok').val(formattedTotal(selectedBarang.harpok));
+            $('#harjul').val(formattedTotal(selectedBarang.harjul));
+            $('#stok').val(selectedBarang.stok);
+            $('#total').val(formattedTotal(selectedBarang.harjul));
+        }
+        $('#barangFilter').val('');
+    })
+
+    // jumlah func
+    $("#jumlahUang").on("keyup", function () {
         var value = $(this).val().replace(/\D/g, '');
         $(this).val(formattedTotal(value / 100));
-        let totalHarga = toNumber($('#total_harga').val());
-        let jumlahUang = toNumber($('#jumlah_uang').val());
-        let kembalian = formattedTotal(jumlahUang - totalHarga)
+        let totalHarga = toNumber($('#totalHarga').val());
+        let jumlahUang = toNumber($('#jumlahUang').val());
+        let kembalian = formattedTotal(jumlahUang - totalHarga);
+        $('#intJumlahUang').val(toNumber($('#jumlahUang').val()));
+        $('#intKembalian').val(toNumber(kembalian));
         $('#kembalian').val(kembalian)
     });
 
-    $("#myInput").on("keyup", function () {
-        $(window).on("click", function () {
-            $("#myList button").addClass('d-none');
-        });
-        var value = $(this).val().toLowerCase();
-        if (value.length > 3) {
-            $("#myList button").filter(function () {
-                if ($(this).text().toLowerCase().indexOf(value) > -1) {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    $(this).removeClass('d-none');
-                } else {
-                    $(this).addClass('d-none');
-                }
-            });
-        } else {
-            $("#myList button").addClass('d-none');
-        }
-    });
-    $("#myList button").on("click", function () {
-        var buttonValue = $(this).text();
-        // Cari data barang berdasarkan kode yang cocok
-        var selectedBarang = barangData.find(function (barang) {
-            return barang.kode === buttonValue;
-        });
 
-        if (selectedBarang) {
-            let total = selectedBarang.harjul * $('#qty').val()
-            $('#kode').val(selectedBarang.kode);
-            $('#nama_barang').val(selectedBarang.nama);
-            $('#harpok').val(formattedTotal(parseFloat(selectedBarang.harpok)));
-            $('#harjul').val(formattedTotal(parseFloat(selectedBarang.harjul)));
-            $('#stok').val(selectedBarang.stok);
-            $('#total').val(formattedTotal(total));
-        }
-        $(window).on("click", function () {
-            $('#myInput').val('')
-            $("#myList button").addClass('d-none');
-        });
-    });
+    // qty func
     $('#qty').on("keyup", function () {
         let harga = toNumber($('#harjul').val());
         let qty = parseFloat($('#qty').val());
@@ -68,6 +60,8 @@ $(document).ready(function () {
         let total = (qty * harga) - ((qty * harga * diskon) / 100);
         $('#total').val(formattedTotal(total));
     });
+
+    // diskon func
     $('#diskon').on("keyup", function () {
         let harga = toNumber($('#harjul').val());
         let qty = parseFloat($('#qty').val());
@@ -75,54 +69,50 @@ $(document).ready(function () {
         let total = (qty * harga) - ((qty * harga * diskon) / 100);
         $('#total').val(formattedTotal(total));
     });
+
+    // add button
     $('#addButton').on("click", function () {
         var kode = $('#kode').val();
-
-        // Check if a row with the same kode already exists
         var existingRow = $('table tbody tr[id="' + kode + '"]');
-
         if (existingRow.length > 0) {
             $('#pesan').removeClass('d-none')
         } else {
-            var nama_barang = $('#nama_barang').val();
+            var namaBarang = $('#namaBarang').val();
             var harpok = $('#harpok').val();
             var harjul = $('#harjul').val();
             var stok = $('#stok').val();
             var qty = $('#qty').val();
             var diskon = $('#diskon').val();
             var total = $('#total').val();
-
-            // Create the row HTML
             var newRow =
                 '<tr id="' + kode + '">' +
                 '<td class="align-middle" data-field="kode">' + kode + '</td>' +
-                '<td class="align-middle" data-field="nama_barang">' + nama_barang + '</td>' +
+                '<td class="align-middle" data-field="namaBarang">' + namaBarang + '</td>' +
                 '<td class="align-middle" data-field="harpok">' + harpok + '</td>' +
                 '<td class="align-middle" data-field="harjul">' + harjul + '</td>' +
                 '<td class="align-middle" data-field="qty">' + qty + '</td>' +
                 '<td class="align-middle" data-field="diskon">' + diskon + '</td>' +
                 '<td class="align-middle" data-field="total">' + total + '</td>' +
                 '<td>' +
-                '<button id="update-' + kode + '" class="btn btn-primary update-button mb-1 me-md-2"><i class="bi bi-trash"></i> Update</button>' +
-                '<button id="delete-' + kode + '" class="btn btn-danger delete-button mb-1"><i class="bi bi-trash"></i> Delete</button>' +
+                '<button type="button" id="update-' + kode + '" class="btn btn-primary update-button mb-1 me-md-2"><i class="bi bi-trash"></i> Update</button>' +
+                '<button type="button" id="delete-' + kode + '" class="btn btn-danger delete-button mb-1"><i class="bi bi-trash"></i> Delete</button>' +
                 '</td>' +
                 '<td class="d-none">' +
                 '<input type="text" readonly hidden name="kode[]" value="' + kode + '"/>' +
-                '<input type="text" readonly hidden name="nama_barang[]" value="' + nama_barang + '"/>' +
-                '<input type="text" readonly hidden name="harpok[]" value="' + harpok + '"/>' +
-                '<input type="text" readonly hidden name="harjul[]" value="' + harjul + '"/>' +
+                '<input type="text" readonly hidden name="namaBarang[]" value="' + namaBarang + '"/>' +
+                '<input type="text" readonly hidden name="harpok[]" value="' + toNumber(harpok) + '"/>' +
+                '<input type="text" readonly hidden name="harjul[]" value="' + toNumber(harjul) + '"/>' +
                 '<input type="text" readonly hidden name="stok[]" value="' + stok + '"/>' +
                 '<input type="text" readonly hidden name="qty[]" value="' + qty + '"/>' +
                 '<input type="text" readonly hidden name="diskon[]" value="' + diskon + '"/>' +
-                '<input type="text" readonly hidden name="total[]" value="' + total + '"/>' +
+                '<input type="text" readonly hidden name="total[]" value="' + toNumber(total) + '"/>' +
                 '</td>' +
                 '</tr>';
-            // Append the new row to the table
             $('table tbody').append(newRow);
             hitungTotalHarga()
         }
         $('#kode').val('');
-        $('#nama_barang').val('');
+        $('#namaBarang').val('');
         $('#harpok').val('');
         $('#harjul').val('');
         $('#stok').val('');
@@ -131,37 +121,32 @@ $(document).ready(function () {
         $('#total').val('');
     });
 
+    // delete button
     $('table').on("click", '.delete-button', function () {
         var row = $(this).closest('tr');
-        var kode = row.attr('id');
         row.remove();
         hitungTotalHarga()
     });
+
+    // update button
     $('table').on("click", '.update-button', function () {
         var row = $(this).closest('tr');
         var kode = row.attr('id');
-
-        // Ambil nilai dari elemen-elemen td dalam baris yang akan dihapus
-        var nama_barang = row.find('td[data-field="nama_barang"]').text();
+        var namaBarang = row.find('td[data-field="namaBarang"]').text();
         var harpok = row.find('td[data-field="harpok"]').text();
         var harjul = row.find('td[data-field="harjul"]').text();
         var stok = row.find('td[data-field="stok"]').text();
         var diskon = row.find('td[data-field="diskon"]').text();
         var qty = row.find('td[data-field="qty"]').text();
         var total = row.find('td[data-field="total"]').text();
-
-
-        // Masukkan nilai-nilai ke dalam elemen input
         $('#kode').val(kode);
-        $('#nama_barang').val(nama_barang);
+        $('#namaBarang').val(namaBarang);
         $('#harpok').val(harpok);
         $('#harjul').val(harjul);
         $('#stok').val(stok);
         $('#diskon').val(diskon);
         $('#qty').val(qty);
         $('#total').val(total);
-
-        // Hapus baris dari tabel
         row.remove();
         hitungTotalHarga()
     });

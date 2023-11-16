@@ -41,6 +41,7 @@ function activeNavbar($name, $active_navbar)
                             <i class="bi bi-person-fill"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="<?= base_url('dashboard/profile') ?>">Profile</a></li>
                             <li><a class="dropdown-item" href="<?= base_url('auth/logout') ?>">Logout</a></li>
                         </ul>
                     </li>
@@ -57,9 +58,10 @@ function activeNavbar($name, $active_navbar)
 
                     <?php if ($this->session->userdata('role') === 'STAFF') { ?>
                         <li>
-                            <a href="<?= base_url('dashboard/transaksi') ?>" class="nav-link px-3">
+                            <a href="<?= base_url('dashboard/jual') ?>"
+                                class="nav-link px-3 <?= activeNavbar('jual', $active_navbar) ?>">
                                 <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                                <span>Transaksi</span>
+                                <span>Jual</span>
                             </a>
                         </li>
                     <?php } else { ?>
@@ -105,6 +107,20 @@ function activeNavbar($name, $active_navbar)
                                 <span>Beli</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="<?= base_url('dashboard/user') ?>"
+                                class="nav-link px-3 <?= activeNavbar('user', $active_navbar) ?>">
+                                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                <span>User</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('dashboard/staff') ?>"
+                                class="nav-link px-3 <?= activeNavbar('staff', $active_navbar) ?>">
+                                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                <span>Staff</span>
+                            </a>
+                        </li>
                     <?php } ?>
 
                     <li>
@@ -138,6 +154,11 @@ function activeNavbar($name, $active_navbar)
                         <hr class="dropdown-divider bg-light" />
                     </li>
                     <li>
+                        <a href="<?= base_url('dashboard/profile') ?>"
+                            class="nav-link px-3 <?= activeNavbar('profile', $active_navbar) ?>">
+                            <span class="me-2"><i class="bi bi-box-arrow-in-left"></i></span>
+                            <span>Profile</span>
+                        </a>
                         <a href="<?= base_url('auth/logout') ?>" class="nav-link px-3">
                             <span class="me-2"><i class="bi bi-box-arrow-in-left"></i></span>
                             <span>Logout</span>

@@ -17,28 +17,34 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <div class="mb-3">
-            <div class="col-2">
-                <div>
-                    <label for="myInput">Cari Kode Barang</label>
-                    <input id="myInput" type="text" placeholder="Ex = BR-IP20" class="form-control mb-1">
-                </div>
-                <div class="position-relative">
-                    <ul id="myList" class="list-group position-absolute border">
-                        <?php foreach ($barang as $b) { ?>
-                            <button class="list-group-item list-group-item-action d-none"><?= $b['kode'] ?></button>
-                        <?php } ?>
-                    </ul>
-                </div>
-            </div>
             <div>
+                <div class="row g-3">
+                    <div class="btn-group col-auto col-md-2">
+                        <div class="d-grid">
+                            <label for="barangButton">Cari Barang</label>
+                            <button class="btn border dropdown-toggle" type="button" id="barangButton"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Pilih Barang
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="barangButton">
+                                <li class="mx-2"><input type="text" class="form-control" id="barangFilter"
+                                        placeholder="Cari Kode">
+                                </li>
+                                <?php foreach ($barang as $s) { ?>
+                                    <li class="dropdown-item barangItem"><?= $s['kode'] . ' | ' . $s['nama'] ?></li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class="row g-3">
                     <div class="col-auto col-md-2">
                         <label for="kode">Kode</label>
-                        <input type="text" class="form-control" value="" readonly id="kode">
+                        <input type="text" class="form-control" readonly id="kode">
                     </div>
                     <div class="col-auto col-md-2">
-                        <label for="nama_barang">Nama Barang</label>
-                        <input type="text" class="form-control" id="nama_barang" readonly>
+                        <label for="namaBarang">Nama Barang</label>
+                        <input type="text" class="form-control" id="namaBarang" readonly>
                     </div>
                     <div class="col-auto col-md-2">
                         <label for="harpok">Harpok Barang</label>
@@ -110,12 +116,12 @@
                     <div class="d-grid gap-2">
                         <div>
                             <div class="col-auto">
-                                <label for="total_harga" class="col-form-label">Total Harga</label>
+                                <label for="totalHarga" class="col-form-label">Total Harga</label>
                             </div>
                         </div>
                         <div>
                             <div class="col-auto">
-                                <label for="jumlah_uang" class="col-form-label">Jumlah Uang</label>
+                                <label for="jumlahUang" class="col-form-label">Jumlah Uang</label>
                             </div>
                         </div>
                         <div>
@@ -131,14 +137,16 @@
                     </div>
                     <div class="d-grid gap-2">
                         <div class="col-auto">
-                            <input type="text" id="total_harga" name="total_harga" class="form-control" readonly
-                                value="0" />
+                            <input type="text" name="intTotalHarga" id="intTotalHarga" hidden readonly />
+                            <input type="text" id="totalHarga" class="form-control" readonly value="0" />
                         </div>
                         <div class=" col-auto">
-                            <input type="text" value="Rp. " id="jumlah_uang" name="jumlah_uang" class="form-control">
+                            <input type="text" name="intJumlahUang" id="intJumlahUang" hidden readonly />
+                            <input type="text" id="jumlahUang" class="form-control" value="0">
                         </div>
                         <div class="col-auto">
-                            <input type="text" id="kembalian" name="kembalian" class="form-control" readonly value="0">
+                            <input type="text" name="intKembalian" id="intKembalian" hidden readonly />
+                            <input type="text" id="kembalian" class="form-control" readonly value="0">
                         </div>
                         <div class="col-auto">
                             <button class="btn btn-primary" type="submit">Cetak</button>

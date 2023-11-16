@@ -3,12 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class ModelBeli extends CI_Model
 {
-    public function addJual($data)
+    public function addBeli($data)
     {
-        return $this->db->insert('jual', $data);
+        return $this->db->insert('beli', $data);
     }
-    public function addDetailJual($data)
+    public function addDetailBeli($data)
     {
-        return $this->db->insert_batch('detail_jual', $data);
+        return $this->db->insert_batch('detail_beli', $data);
     }
 }
