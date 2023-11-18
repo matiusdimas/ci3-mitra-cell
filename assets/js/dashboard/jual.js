@@ -14,6 +14,12 @@ const toNumber = (total) => {
     return parseFloat(total.replace(/[^0-9,-]+/g, "").replace(',', '.'));
 }
 $(document).ready(function () {
+    // form submit 
+    $('#formJual').submit(function (e) {
+        $(this).unbind('submit').submit();
+        location.reload();
+    });
+
     // barang filter
     $("#barangFilter").on("keyup", function () {
         var value = $(this).val().toLowerCase();

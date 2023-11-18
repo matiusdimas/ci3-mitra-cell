@@ -45,8 +45,8 @@
                                         <a href="detail_jual/detail/<?= $j['nofak'] ?>" class="btn btn-primary mb-1"><i
                                                 class="bi bi-list-ol"></i>
                                             Detail</a>
-                                        <button class="btn btn-success mb-1"><i class="bi bi-printer-fill"></i>
-                                            Print</button>
+                                        <a target="_blank" href="<?= base_url('detail_jual/pdf/' . $j['nofak']) ?>" class="btn btn-success mb-1"><i class="bi bi-printer-fill"></i>
+                                            Print</a>
                                     </td>
                                 </tr>
                             <?php } ?>

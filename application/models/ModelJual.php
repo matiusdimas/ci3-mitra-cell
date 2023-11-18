@@ -11,6 +11,15 @@ class ModelJual extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+    public function getWhereJual($where)
+    {
+        $this->db->select('jual.*, user.username');
+        $this->db->from('jual');
+        $this->db->where($where);
+        $this->db->join('user', 'jual.user_id = user.user_id', 'left');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
     public function addJual($data)
     {
         return $this->db->insert('jual', $data);

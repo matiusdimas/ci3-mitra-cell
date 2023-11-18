@@ -14,9 +14,10 @@
             </div>
         </div>
         <div class="my-2">
-            <button class="btn btn-success mb-1"><i class="bi bi-printer-fill"></i>
+            <a target="_blank" href="<?= base_url('detail_jual/pdf/' . $nofak) ?>" class="btn btn-success mb-1"><i
+                    class="bi bi-printer-fill"></i>
                 Print
-            </button>
+            </a>
             <button class="btn btn-secondary mb-1" onclick="window.history.go(-1)">
                 Back
             </button>

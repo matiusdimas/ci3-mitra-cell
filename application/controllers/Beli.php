@@ -101,7 +101,17 @@ class Beli extends CI_Controller
                     'total' => $total,
                 ];
                 $stok = $this->ModelBarang->getWhereBarang(['kode' => $barang_id])->row()->stok;
+                $harpok = $this->ModelBarang->getWhereBarang(['kode' => $barang_id])->row()->harpok;
+                if ($harpok == 0 || $stok == 0) {
+                    $harpok_new = $harga;
+                } else {
+                    $modal = intval($harpok * $stok + $total);
+                    $harpok_new = intval(ceil(($modal) / ($stok + $jumlah)));
+                    $harjul_new = intval(ceil(($modal + ($modal * (20 / 100))) / ($stok + $jumlah)));
+                }
                 $data_stok[] = [
+                    'harjul' => $harjul_new,
+                    'harpok' => $harpok_new,
                     'stok' => $stok + $jumlah,
                     'kode' => $barang_id,
                 ];

@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <form action="<?= base_url('jual/addJual') ?>" method="post">
+        <form id="formJual" action="<?= base_url('jual/addJual') ?>" method="post" target="_blank">
             <div class="card">
                 <div class="card-header">
                     <span><i class="bi bi-table me-2"></i></span> Data Jual
@@ -161,4 +161,4 @@
 <script>
     var barangData = <?php echo json_encode($barang); ?>
 </script>
-<script src="<?= base_url('assets/js/dashboard/jual.js') ?>"></script>
+<script src="<?= base_url('assets/js/dashboard/jual.js?v=16') ?>"></script>

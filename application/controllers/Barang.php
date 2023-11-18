@@ -142,6 +142,7 @@ class Barang extends CI_Controller
             $data = [
                 'kode' => $this->input->post('kode'),
                 'nama' => $this->input->post('nama_barang'),
+                'harpok' => $this->input->post('harpok'),
                 'harjul' => $this->input->post('harjul'),
                 'kategori_id' => $this->input->post('id_kategori'),
                 'user_id_last_updated' => $getId->user_id,

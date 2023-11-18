@@ -132,7 +132,7 @@ class Jual extends CI_Controller
             $this->ModelJual->addDetailJual($data_detail_jual);
             $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible text-center fade show" role="alert">Berhasil Jual<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>');
-            redirect('jual');
+            redirect('detail_jual/pdf/' . $data_jual['nofak']);
         }
     }
 }
