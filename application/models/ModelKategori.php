@@ -8,6 +8,11 @@ class ModelKategori extends CI_Model
         $query = $this->db->get('kategori');
         return $query->result_array();
     }
+    public function getWhereKategori($data)
+    {
+        $query = $this->db->get_where('kategori', $data);
+        return $query->result_array();
+    }
     public function addKategori($data)
     {
         $this->db->insert('kategori', $data);

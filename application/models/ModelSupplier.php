@@ -14,7 +14,11 @@ class ModelSupplier extends CI_Model
     }
     public function getWhereSupplier($data)
     {
-        return $this->db->get_where('supplier', $data);
+        $this->db->select('supplier.*, user.username AS username');
+        $this->db->from('supplier');
+        $this->db->where($data);
+        $this->db->join('user as user', 'supplier.user_id = user.user_id', 'left');
+        return $this->db->get();
     }
     public function addSupplier($data)
     {

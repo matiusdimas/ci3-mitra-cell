@@ -18,7 +18,7 @@
         </div>
         <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
-                <form class="modal-content" action="<?= base_url('dashboard/addSupplier') ?>" method="post">
+                <form class="modal-content" action="<?= base_url('supplier/addSupplier') ?>" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Tambah Supplier</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -78,7 +78,7 @@
                                     <td class="align-middle"><?= $s['nama'] ?></td>
                                     <td class="align-middle"><?= $s['alamat'] ?></td>
                                     <td class="align-middle"><?= $s['no_telp'] ?></td>
-                                    <td class="align-middle"><?= $s['username'] ?></td>
+                                    <td class="align-middle"><a href="<?= base_url('user?query='. $s['user_id']) ?> " class="text-decoration-none"><?= $s['username'] ?></td>
                                     <td class="align-middle"><?= $s['createdAt'] ?></td>
                                     <td class="align-middle"><?= $s['updatedAt'] ?></td>
                                     <td>
@@ -92,7 +92,7 @@
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-scrollable">
                                                 <form class="modal-content"
-                                                    action="<?= base_url('dashboard/updateSupplier') ?>" method="post">
+                                                    action="<?= base_url('supplier/updateSupplier') ?>" method="post">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">Update
                                                             Supplier
@@ -153,7 +153,7 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-bs-dismiss="modal">Close</button>
-                                                        <a href="<?= base_url('dashboard/deleteSupplier/' . $s['kode']) ?>"
+                                                        <a href="<?= base_url('supplier/deleteSupplier/' . $s['kode']) ?>"
                                                             type="button" class="btn btn-primary">Delete</a>
                                                     </div>
                                                 </div>

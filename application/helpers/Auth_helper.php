@@ -28,6 +28,6 @@ function _cekRole()
 {
     $ci = get_instance();
     if ($ci->session->userdata('role') === 'STAFF') {
-        redirect('dashboard/jual');
+        redirect('jual');
     }
 }

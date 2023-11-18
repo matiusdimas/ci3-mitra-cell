@@ -19,7 +19,7 @@
         </div>
         <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <form class="modal-content" action="<?= base_url('dashboard/addStaff') ?>" method="post">
+                <form class="modal-content" action="<?= base_url('staff/addStaff') ?>" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Add Staff</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -91,7 +91,7 @@
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <form class="modal-content"
-                                                    action="<?= base_url('dashboard/updateStaff') ?>" method="post">
+                                                    action="<?= base_url('staff/updateStaff') ?>" method="post">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">
                                                             Update Staff
@@ -157,7 +157,7 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-bs-dismiss="modal">Close</button>
-                                                        <a href="<?= base_url('dashboard/deleteStaff/' . $s['id']) ?>"
+                                                        <a href="<?= base_url('staff/deleteStaff/' . $s['id']) ?>"
                                                             type="button" class="btn btn-primary">Delete</a>
                                                     </div>
                                                 </div>

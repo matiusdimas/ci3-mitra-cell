@@ -13,7 +13,7 @@
             </div>
         <?php } ?>
         <?= $this->session->flashdata('pesan'); ?>
-        <form action="<?= base_url('dashboard/updateprofile') ?>" method="post" class="d-grid gap-2">
+        <form action="<?= base_url('profile/updateprofile') ?>" method="post" class="d-grid gap-2">
             <?php foreach ($profile as $pro => $p) { ?>
                 <div class="col-auto col-md-4">
                     <label for="username">Username</label>

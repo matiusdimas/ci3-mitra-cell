@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <form action="<?= base_url('dashboard/addJual') ?>" method="post">
+        <form action="<?= base_url('jual/addJual') ?>" method="post">
             <div class="card">
                 <div class="card-header">
                     <span><i class="bi bi-table me-2"></i></span> Data Jual
@@ -149,7 +149,8 @@
                             <input type="text" id="kembalian" class="form-control" readonly value="0">
                         </div>
                         <div class="col-auto">
-                            <button class="btn btn-primary" type="submit">Cetak</button>
+                            <button class="btn btn-primary" type="submit"><i class="bi bi-printer-fill"></i>
+                                Cetak</button>
                         </div>
                     </div>
                 </div>

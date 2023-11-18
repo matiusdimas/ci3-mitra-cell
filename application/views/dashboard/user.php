@@ -19,7 +19,7 @@
         </div>
         <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <form class="modal-content" action="<?= base_url('dashboard/addUser') ?>" method="post">
+                <form class="modal-content" action="<?= base_url('user/addUser') ?>" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -78,13 +78,14 @@
                         </thead>
                         <tbody>
                             <?php foreach ($user as $use => $s) { ?>
-                                <?php if ($s['username'] !== $this->session->userdata('username')) { ?>
-                                    <tr>
-                                        <td class="align-middle"><?= $use + 1 ?></td>
-                                        <td class="align-middle"><?= $s['username'] ?></td>
-                                        <td class="align-middle"><?= $s['role'] ?></td>
-                                        <td class="align-middle"><?= $s['nama'] ?></td>
-                                        <td>
+                                <tr>
+                                    <td class="align-middle"><?= $use + 1 ?></td>
+                                    <td class="align-middle"><?= $s['username'] ?></td>
+                                    <td class="align-middle"><?= $s['role'] ?></td>
+                                    <td class="align-middle"><a href="<?= base_url('staff?query=' . $s['staff_id']) ?> "
+                                            class="text-decoration-none"><?= $s['nama'] ?></td>
+                                    <td>
+                                        <?php if ($s['username'] !== $this->session->userdata('username')) { ?>
                                             <button class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#update<?= $use + 1 ?>"><i class="bi bi-pencil-fill"></i>
                                                 Update</button>
@@ -98,7 +99,7 @@
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
 
-                                                    <form class="modal-content" action="<?= base_url('dashboard/updateUser') ?>"
+                                                    <form class="modal-content" action="<?= base_url('user/updateUser') ?>"
                                                         method="post">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="exampleModalLabel">
@@ -156,7 +157,7 @@
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-bs-dismiss="modal">Close</button>
-                                                            <a href="<?= base_url('dashboard/resetUser/' . $s['user_id']) ?>"
+                                                            <a href="<?= base_url('user/resetUser/' . $s['user_id']) ?>"
                                                                 type="button" class="btn btn-primary">Reset</a>
                                                         </div>
                                                     </div>
@@ -175,15 +176,15 @@
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-bs-dismiss="modal">Close</button>
-                                                            <a href="<?= base_url('dashboard/deleteUser/' . $s['user_id']) ?>"
+                                                            <a href="<?= base_url('user/deleteUser/' . $s['user_id']) ?>"
                                                                 type="button" class="btn btn-primary">Delete</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
+                                        <?php } ?>
+                                    </td>
+                                </tr>
                             <?php } ?>
                         </tbody>
                     </table>

@@ -91,7 +91,7 @@
                 </div>
             </div>
         </div>
-        <form action="<?= base_url('dashboard/addBeli') ?>" method="post">
+        <form action="<?= base_url('beli/addBeli') ?>" method="post">
             <div class="card">
                 <div class="card-header">
                     <span><i class="bi bi-table me-2"></i></span> Data Beli
@@ -143,7 +143,8 @@
                             <input type="text" id="totalHarga" class="form-control" readonly value="0" />
                         </div>
                         <div class="col-auto">
-                            <button class="btn btn-primary" type="submit">Simpan</button>
+                            <button class="btn btn-primary" type="submit"><i class="bi bi-printer-fill"></i>
+                                Cetak</button>
                         </div>
                     </div>
                 </div>

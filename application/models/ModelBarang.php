@@ -16,7 +16,13 @@ class ModelBarang extends CI_Model
     }
     public function getWhereBarang($data)
     {
-        return $this->db->get_where('barang', $data);
+        $this->db->select('barang.*, kategori.kategori_nama, user1.username AS inputBy, user2.username AS last_inputBy');
+        $this->db->from('barang');
+        $this->db->where($data);
+        $this->db->join('kategori', 'barang.kategori_id = kategori.id', 'left');
+        $this->db->join('user AS user1', 'barang.user_id = user1.user_id', 'left'); // Untuk user yang menginput barang
+        $this->db->join('user AS user2', 'barang.user_id_last_updated = user2.user_id', 'left');
+        return $this->db->get();
     }
     public function addBarang($data)
     {

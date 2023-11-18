@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2023 at 05:19 AM
+-- Generation Time: Nov 18, 2023 at 11:14 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -45,7 +45,8 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`kode`, `nama`, `harpok`, `harjul`, `stok`, `kategori_id`, `user_id`, `createdAt`, `user_id_last_updated`, `updatedAt`) VALUES
-('BR-BR-IP835', 'Iphone 12', 10000000, 15000000, 29, 2, 7, '2023-11-16 01:49:19', 7, '2023-11-15 19:51:38');
+('BR-IP290', 'Iphone 12s', 0, 0, 0, 3, 7, '2023-11-18 16:03:34', NULL, NULL),
+('BR-IP835', 'Iphone 13s', 0, 10000000, 25, 3, 7, '2023-11-17 23:37:39', 7, '2023-11-18 10:50:13');
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,8 @@ CREATE TABLE `beli` (
 --
 
 INSERT INTO `beli` (`nofak`, `createdAt`, `supplier_kode`, `user_id`, `total`) VALUES
-('B20231115195439SUP-CI907', '2023-11-15 19:54:39', 'SUP-CI90', 7, 100000000);
+('B20231118103021SUP-MT37', '2023-11-18 10:30:21', 'SUP-MT3', 7, 80000000),
+('B20231118105506SUP-PIs97', '2023-11-18 10:55:06', 'SUP-PIs9', 7, 280000000);
 
 -- --------------------------------------------------------
 
@@ -89,7 +91,8 @@ CREATE TABLE `detail_beli` (
 --
 
 INSERT INTO `detail_beli` (`id`, `beli_nofak`, `barang_kode`, `nama`, `harga`, `jumlah`, `total`) VALUES
-(3, 'B20231115195439SUP-CI907', 'BR-BR-IP835', 'Iphone 12', 10000000, 10, 100000000);
+(4, 'B20231118103021SUP-MT37', 'BR-IP835', 'Iphone 13s', 8000000, 10, 80000000),
+(5, 'B20231118105506SUP-PIs97', 'BR-IP835', 'Iphone 13s', 14000000, 20, 280000000);
 
 -- --------------------------------------------------------
 
@@ -114,7 +117,9 @@ CREATE TABLE `detail_jual` (
 --
 
 INSERT INTO `detail_jual` (`id`, `jual_nofak`, `barang_kode`, `nama`, `harpok`, `harjul`, `qty`, `diskon`, `total`) VALUES
-(1, '202311151952067', 'BR-BR-IP835', 'Iphone 12', 10000000, 15000000, 1, 0, 15000000);
+(1, '202311180956189', NULL, 'Iphone 12', 10000000, 12000000, 1, 0, 12000000),
+(2, '202311181000347', NULL, 'Iphone 12', 10000000, 12000000, 27, 0, 324000000),
+(3, '202311181032187', 'BR-IP835', 'Iphone 13s', 0, 10000000, 5, 25, 37500000);
 
 -- --------------------------------------------------------
 
@@ -136,13 +141,9 @@ CREATE TABLE `jual` (
 --
 
 INSERT INTO `jual` (`nofak`, `createdAt`, `total`, `jml_uang`, `kembalian`, `user_id`) VALUES
-('202311151844197', '2023-11-16 00:44:19', 0, 0, 0, 7),
-('202311151845517', '2023-11-16 00:45:51', 2000000, 2000000, -1990000, 7),
-('202311151846527', '2023-11-16 00:46:52', 2000000, 2000000, -1900000, 7),
-('202311151913487', '2023-11-16 01:13:48', 3000000, 3000000, 0, 7),
-('202311151914477', '2023-11-16 01:14:47', 0, 1, 1, 7),
-('202311151915487', '2023-11-16 01:15:48', 0, 11111, 11111, 7),
-('202311151952067', '2023-11-16 01:52:06', 15000000, 15555556, 555556, 7);
+('202311180956189', '2023-11-18 15:56:18', 12000000, 12500000, 500000, 9),
+('202311181000347', '2023-11-18 16:00:34', 324000000, 400000000, 76000000, 7),
+('202311181032187', '2023-11-18 16:32:18', 37500000, 40000000, 2500000, 7);
 
 -- --------------------------------------------------------
 
@@ -160,7 +161,9 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id`, `kategori_nama`) VALUES
-(2, 'OPPO');
+(2, 'OPPO'),
+(3, 'Iphoness'),
+(4, 'Xiamo');
 
 -- --------------------------------------------------------
 
@@ -184,8 +187,8 @@ CREATE TABLE `staff` (
 
 INSERT INTO `staff` (`id`, `nama`, `no_ktp`, `alamat`, `no_hp`, `createdAt`, `updatedAt`) VALUES
 (1, 'matius', '3172138024421', 'bekasi', '0891111', '2023-11-09', NULL),
-(4, 'rasasd', '317819830123', 'bekasi', '08213712312', '2023-11-15', '2023-11-15'),
-(5, 'panjul', '098098092890', 'bekasi', '879182102', '2023-11-15', NULL);
+(4, 'tiuss', '317819830123', 'bekasi', '08213712312', '2023-11-15', '2023-11-17'),
+(5, 'panjuls', '098098092890', 'bekasi', '879182102', '2023-11-15', '2023-11-17');
 
 -- --------------------------------------------------------
 
@@ -209,7 +212,8 @@ CREATE TABLE `supplier` (
 
 INSERT INTO `supplier` (`kode`, `nama`, `alamat`, `no_telp`, `user_id`, `createdAt`, `updatedAt`) VALUES
 ('SUP-CI90', 'PT. Cemerlang Indo', 'lubang buaya', '0899012', 3, '2023-11-14 13:47:35', '2023-11-14 08:28:48'),
-('SUP-MT3', 'PT. Matahari Rakyat Besa', 'JAtinegara', '08999912', 3, '2023-11-14 14:28:17', '2023-11-14 08:28:57');
+('SUP-MT3', 'PT. Matahari Rakyat Besa', 'JAtinegara', '08999912', 3, '2023-11-14 14:28:17', '2023-11-14 08:28:57'),
+('SUP-PIs9', 'PT. Matahari Updated', 'bekasi', '0899999', 7, '2023-11-17 23:39:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -315,19 +319,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `detail_beli`
 --
 ALTER TABLE `detail_beli`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `detail_jual`
 --
 ALTER TABLE `detail_jual`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `staff`

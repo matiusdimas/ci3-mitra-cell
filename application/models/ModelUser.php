@@ -25,7 +25,11 @@ class ModelUser extends CI_Model
     }
     public function cekData($where = null)
     {
-        return $this->db->get_where('user', $where);
+        $this->db->select('user.*, staff.nama');
+        $this->db->from('user');
+        $this->db->where($where);
+        $this->db->join('staff', 'user.staff_id = staff.id', 'left');
+        return $this->db->get();
     }
     public function getId($where = null)
     {

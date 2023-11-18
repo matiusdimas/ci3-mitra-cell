@@ -19,7 +19,7 @@
         </div>
         <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
-                <form class="modal-content" action="<?= base_url('dashboard/addBarang') ?>" method="post">
+                <form class="modal-content" action="<?= base_url('barang/addBarang') ?>" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Tambah Barang</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -28,7 +28,7 @@
                         <div class="mb-3">
                             <label for="kode" class="form-label">Masukan Kode Barang</label>
                             <input required value="<?= set_value('kode'); ?>" type="text" class="form-control" id="kode"
-                                name="kode" placeholder="Ex = 'IP32'">
+                                name="kode" placeholder="Ex = 'BR-IP32'">
                         </div>
                         <div class="mb-3">
                             <label for="nama_barang" class="form-label">Nama Barang</label>
@@ -83,10 +83,10 @@
                                     <td class="align-middle">Rp. <?= number_format($b['harpok'], 0, ',', '.') ?></td>
                                     <td class="align-middle">Rp. <?= number_format($b['harjul'], 0, ',', '.') ?></td>
                                     <td class="align-middle"><?= $b['stok'] ?></td>
-                                    <td class="align-middle"><?= $b['kategori_nama'] ?></td>
-                                    <td class="align-middle"><?= $b['inputBy'] ?></td>
+                                    <td class="align-middle"><a href="<?= base_url('kategori?query='. $b['kategori_id']) ?> " class="text-decoration-none"><?= $b['kategori_nama'] ?></a></td>
+                                    <td class="align-middle"><a href="<?= base_url('user?query='. $b['user_id']) ?> " class="text-decoration-none"><?= $b['inputBy'] ?></td>
                                     <td class="align-middle"><?= $b['createdAt'] ?></td>
-                                    <td class="align-middle"><?= $b['last_inputBy'] ?></td>
+                                    <td class="align-middle"><a href="<?= base_url('user?query='. $b['user_id_last_updated']) ?> " class="text-decoration-none"><?= $b['last_inputBy'] ?></td>
                                     <td class="align-middle"><?= $b['updatedAt'] ?></td>
                                     <td>
                                         <button class="btn btn-primary mb-1" data-bs-toggle="modal"
@@ -99,7 +99,7 @@
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-scrollable">
                                                 <form class="modal-content"
-                                                    action="<?= base_url('dashboard/updateBarang') ?>" method="post">
+                                                    action="<?= base_url('barang/updateBarang') ?>" method="post">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">Update
                                                             Barang
@@ -137,7 +137,7 @@
                                                         <div class="mb-3">
                                                             <label for="stok" class="form-label">Stok</label>
                                                             <input type="text" class="form-control" id="stok" name="stok"
-                                                                placeholder="Masukkan Stok" value="<?= $b['stok'] ?>">
+                                                                placeholder="Masukkan Stok" value="<?= $b['stok'] ?>" readonly>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="kategori" class="form-label">Pilih Kategori</label>
@@ -175,7 +175,7 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-bs-dismiss="modal">Close</button>
-                                                        <a href="<?= base_url('dashboard/deleteBarang/' . $b['kode']) ?>"
+                                                        <a href="<?= base_url('barang/deleteBarang/' . $b['kode']) ?>"
                                                             type="button" class="btn btn-primary">Delete</a>
                                                     </div>
                                                 </div>

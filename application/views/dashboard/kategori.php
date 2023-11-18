@@ -27,7 +27,7 @@
         </div>
         <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <form class="modal-content" action="<?= base_url('dashboard/addKategori') ?>" method="post">
+                <form class="modal-content" action="<?= base_url('kategori/addKategori') ?>" method="post">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Add Kategori</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -77,7 +77,7 @@
                                             <div class="modal-dialog modal-dialog-centered">
 
                                                 <form class="modal-content"
-                                                    action="<?= base_url('dashboard/updateKategori') ?>" method="post">
+                                                    action="<?= base_url('kategori/updateKategori') ?>" method="post">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">Update
                                                             Kategori
@@ -119,7 +119,7 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-bs-dismiss="modal">Close</button>
-                                                        <a href="<?= base_url('dashboard/hapusKategori/' . $k['id']) ?>"
+                                                        <a href="<?= base_url('kategori/hapusKategori/' . $k['id']) ?>"
                                                             type="button" class="btn btn-primary">Delete</a>
                                                     </div>
                                                 </div>
