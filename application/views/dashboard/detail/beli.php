@@ -45,8 +45,9 @@
                                         <a href="detail_beli/detail/<?= $b['nofak'] ?>" class="btn btn-primary mb-1"><i
                                                 class="bi bi-list-ol"></i>
                                             Detail</a>
-                                        <button class="btn btn-success mb-1"><i class="bi bi-printer-fill"></i>
-                                            Print</button>
+                                        <a href="detail_beli/pdf/<?= $b['nofak'] ?>" target="_blank"
+                                            class="btn btn-success mb-1"><i class="bi bi-printer-fill"></i>
+                                            Print</a>
                                     </td>
                                 </tr>
                             <?php } ?>

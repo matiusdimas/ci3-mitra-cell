@@ -12,9 +12,9 @@
             </div>
         <?php } ?>
         <?= $this->session->flashdata('pesan') ?>
-        <div id="pesan" class="alert alert-danger alert-dismissible text-center fade show d-none" role="alert">
+        <div id="pesanBarang" class="alert alert-danger alert-dismissible text-center fade show d-none" role="alert">
             <div>Barang Tersebut Sudah ada Di Table</div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close hilang" aria-label="Close"></button>
         </div>
         <div class="mb-3">
             <div>
@@ -161,4 +161,4 @@
 <script>
     var barangData = <?php echo json_encode($barang); ?>
 </script>
-<script src="<?= base_url('assets/js/dashboard/jual.js?v=16') ?>"></script>
+<script src="<?= base_url('assets/js/dashboard/jual.js?v=19') ?>"></script>

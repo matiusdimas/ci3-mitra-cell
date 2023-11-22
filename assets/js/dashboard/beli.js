@@ -14,6 +14,12 @@ const toNumber = (total) => {
     return parseFloat(total.replace(/[^0-9,-]+/g, "").replace(',', '.'));
 }
 $(document).ready(function () {
+    // form submit
+    $('#formbeli').submit(function (e) {
+        $(this).unbind('submit').submit();
+        location.reload();
+    });
+
     // supplier filter
     $("#supplierFilter").on("keyup", function () {
         var value = $(this).val().toLowerCase();
@@ -152,4 +158,10 @@ $(document).ready(function () {
         row.remove();
         hitungTotalHarga()
     });
+
+    // class hilang
+    $('.hilang').on("click", () => {
+        $('#pesanBarang').addClass('d-none');
+        $('#pesanSupplier').addClass('d-none');
+    })
 });

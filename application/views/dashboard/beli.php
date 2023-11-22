@@ -14,11 +14,11 @@
         <?= $this->session->flashdata('pesan') ?>
         <div id="pesanSupplier" class="alert alert-danger alert-dismissible text-center fade show d-none" role="alert">
             <div>Kode Supplier Tidak Boleh Beda</div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close hilang" aria-label="Close"></button>
         </div>
         <div id="pesanBarang" class="alert alert-danger alert-dismissible text-center fade show d-none" role="alert">
             <div>Kode Barang Sudah Ada Di Table</div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close hilang" aria-label="Close"></button>
         </div>
         <div class="my-3">
             <div>
@@ -91,7 +91,7 @@
                 </div>
             </div>
         </div>
-        <form action="<?= base_url('beli/addBeli') ?>" method="post">
+        <form id="formbeli" action="<?= base_url('beli/addBeli') ?>" method="post" target="_blank">
             <div class="card">
                 <div class="card-header">
                     <span><i class="bi bi-table me-2"></i></span> Data Beli
@@ -156,4 +156,4 @@
     var barangData = <?php echo json_encode($barang); ?>;
     var supplierData = <?php echo json_encode($supplier); ?>;
 </script>
-<script src="<?= base_url('assets/js/dashboard/beli.js') ?>"></script>
+<script src="<?= base_url('assets/js/dashboard/beli.js?v=3') ?>"></script>

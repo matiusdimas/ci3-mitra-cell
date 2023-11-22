@@ -28,7 +28,9 @@ function activeNavbar($name, $active_navbar)
                 aria-controls="offcanvasExample">
                 <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
             </button>
-            <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold" href="<?= base_url() ?>">Mitra Cell</a>
+            <a class="navbar-brand me-auto ms-lg-2 ms-3 mt-lg-1 text-uppercase fw-bold"
+                href="<?= base_url() ?>"><strong>Mitra
+                    Cell</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavBar"
                 aria-controls="topNavBar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -59,7 +61,7 @@ function activeNavbar($name, $active_navbar)
                     <?php if ($this->session->userdata('role') === 'STAFF') { ?>
                         <li>
                             <a href="<?= base_url('jual') ?>"
-                                class="nav-link px-3 <?= activeNavbar('jual', $active_navbar) ?>">
+                                class="mt-2 nav-link px-3 <?= activeNavbar('jual', $active_navbar) ?>">
                                 <span class="me-2"><i class="bi bi-speedometer2"></i></span>
                                 <span>Jual</span>
                             </a>
@@ -67,64 +69,82 @@ function activeNavbar($name, $active_navbar)
                     <?php } else { ?>
                         <li>
                             <a href="<?= base_url('dashboard') ?>"
-                                class="nav-link px-3 <?= activeNavbar('dashboard', $active_navbar) ?>">
+                                class="mt-2 nav-link px-3 <?= activeNavbar('dashboard', $active_navbar) ?>">
                                 <span class="me-2"><i class="bi bi-speedometer2"></i></span>
                                 <span>Dashboard</span>
                             </a>
                         </li>
                         <li>
-                            <a href="<?= base_url('barang') ?>"
-                                class="nav-link px-3 <?= activeNavbar('barang', $active_navbar) ?>">
-                                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                                <span>Barang</span>
+                            <a class="nav-link px-3 sidebar-link <?= activeNavbar('jual', $active_navbar) ?> <?= activeNavbar('beli', $active_navbar) ?>"
+                                data-bs-toggle="collapse" href="#pesan">
+                                <span class="me-2"><i class="bi bi-journal-text"></i></span>
+                                <span>Input Pesanan</span>
+                                <span class="ms-auto">
+                                    <span class="right-icon">
+                                        <i class="bi bi-chevron-down"></i>
+                                    </span>
+                                </span>
                             </a>
+                            <div class="collapse" id="pesan">
+                                <ul class="navbar-nav ps-3">
+                                    <li>
+                                        <a href="<?= base_url('jual') ?>"
+                                            class="nav-link px-3 <?= activeNavbar('jual', $active_navbar) ?>">
+                                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                            <span>Jual</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= base_url('beli') ?>"
+                                            class="nav-link px-3 <?= activeNavbar('beli', $active_navbar) ?>">
+                                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                            <span>Beli</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li>
-                            <a href="<?= base_url('jual') ?>"
-                                class="nav-link px-3 <?= activeNavbar('jual', $active_navbar) ?>">
-                                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                                <span>Jual</span>
+                            <a class="nav-link px-3 sidebar-link <?= activeNavbar('supplier', $active_navbar) ?> <?= activeNavbar('kategori', $active_navbar) ?> <?= activeNavbar('barang', $active_navbar) ?>"
+                                data-bs-toggle="collapse" href="#data">
+                                <span class="me-2"><i class="bi bi-box-seam"></i></span>
+                                <span>Data Barang</span>
+                                <span class="ms-auto">
+                                    <span class="right-icon">
+                                        <i class="bi bi-chevron-down"></i>
+                                    </span>
+                                </span>
                             </a>
-                        </li>
-                        <li>
-                            <a href="<?= base_url('kategori') ?>"
-                                class="nav-link px-3 <?= activeNavbar('kategori', $active_navbar) ?>">
-                                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                                <span>Kategori</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= base_url('supplier') ?>"
-                                class="nav-link px-3 <?= activeNavbar('supplier', $active_navbar) ?>">
-                                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                                <span>Supplier</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= base_url('beli') ?>"
-                                class="nav-link px-3 <?= activeNavbar('beli', $active_navbar) ?>">
-                                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                                <span>Beli</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= base_url('user') ?>"
-                                class="nav-link px-3 <?= activeNavbar('user', $active_navbar) ?>">
-                                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                                <span>User</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= base_url('staff') ?>"
-                                class="nav-link px-3 <?= activeNavbar('staff', $active_navbar) ?>">
-                                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
-                                <span>Staff</span>
-                            </a>
+                            <div class="collapse" id="data">
+                                <ul class="navbar-nav ps-3">
+                                    <li>
+                                        <a href="<?= base_url('supplier') ?>"
+                                            class="nav-link px-3 <?= activeNavbar('supplier', $active_navbar) ?>">
+                                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                            <span>Supplier</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= base_url('kategori') ?>"
+                                            class="nav-link px-3 <?= activeNavbar('kategori', $active_navbar) ?>">
+                                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                            <span>Kategori</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= base_url('barang') ?>"
+                                            class="nav-link px-3 <?= activeNavbar('barang', $active_navbar) ?>">
+                                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                            <span>Barang</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li>
                             <a class="nav-link px-3 sidebar-link <?= activeNavbar('pembelian', $active_navbar) ?> <?= activeNavbar('penjualan', $active_navbar) ?>"
                                 data-bs-toggle="collapse" href="#layouts">
-                                <span class="me-2"><i class="bi bi-layout-split"></i></span>
+                                <span class="me-2"><i class="bi bi-archive-fill"></i></span>
                                 <span>Detail</span>
                                 <span class="ms-auto">
                                     <span class="right-icon">
@@ -151,6 +171,37 @@ function activeNavbar($name, $active_navbar)
                                 </ul>
                             </div>
                         </li>
+                        <li>
+                            <a class="nav-link px-3 sidebar-link <?= activeNavbar('user', $active_navbar) ?> <?= activeNavbar('staff', $active_navbar) ?>"
+                                data-bs-toggle="collapse" href="#user">
+                                <span class="me-2"><i class="bi bi-people-fill"></i></span>
+                                <span>Data User</span>
+                                <span class="ms-auto">
+                                    <span class="right-icon">
+                                        <i class="bi bi-chevron-down"></i>
+                                    </span>
+                                </span>
+                            </a>
+                            <div class="collapse" id="user">
+                                <ul class="navbar-nav ps-3">
+                                    <li>
+                                        <a href="<?= base_url('user') ?>"
+                                            class="nav-link px-3 <?= activeNavbar('user', $active_navbar) ?>">
+                                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                            <span>User</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= base_url('staff') ?>"
+                                            class="nav-link px-3 <?= activeNavbar('staff', $active_navbar) ?>">
+                                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                            <span>Staff</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
                     <?php } ?>
                     <li class="my-4">
                         <hr class="dropdown-divider bg-light" />
@@ -158,7 +209,7 @@ function activeNavbar($name, $active_navbar)
                     <li>
                         <a href="<?= base_url('profile') ?>"
                             class="nav-link px-3 <?= activeNavbar('profile', $active_navbar) ?>">
-                            <span class="me-2"><i class="bi bi-box-arrow-in-left"></i></span>
+                            <span class="me-2"><i class="bi bi-person-fill"></i></span>
                             <span>Profile</span>
                         </a>
                         <a href="<?= base_url('auth/logout') ?>" class="nav-link px-3">

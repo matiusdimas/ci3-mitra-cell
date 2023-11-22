@@ -80,8 +80,9 @@ $(document).ready(function () {
     $('#addButton').on("click", function () {
         var kode = $('#kode').val();
         var existingRow = $('table tbody tr[id="' + kode + '"]');
+        console.log(existingRow)
         if (existingRow.length > 0) {
-            $('#pesan').removeClass('d-none')
+            $('#pesanBarang').removeClass('d-none')
         } else {
             var namaBarang = $('#namaBarang').val();
             var harpok = $('#harpok').val();
@@ -156,5 +157,8 @@ $(document).ready(function () {
         row.remove();
         hitungTotalHarga()
     });
-
+    // class hilang
+    $('.hilang').on("click", () => {
+        $('#pesanBarang').addClass('d-none');
+    })
 });

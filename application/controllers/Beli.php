@@ -68,6 +68,7 @@ class Beli extends CI_Controller
             $tanggal_sekarang = date('YmdHis');
             $data_detail_beli = [];
             $data_stok = [];
+
             if ($total_harga < 1) {
                 $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible text-center fade show" role="alert">Total Tidak Boleh 0<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>');
@@ -104,6 +105,7 @@ class Beli extends CI_Controller
                 $harpok = $this->ModelBarang->getWhereBarang(['kode' => $barang_id])->row()->harpok;
                 if ($harpok == 0 || $stok == 0) {
                     $harpok_new = $harga;
+                    $harjul_new = intval(ceil($harga + ($harga * (20 / 100))));
                 } else {
                     $modal = intval($harpok * $stok + $total);
                     $harpok_new = intval(ceil(($modal) / ($stok + $jumlah)));
@@ -121,7 +123,7 @@ class Beli extends CI_Controller
             $this->ModelBeli->addDetailBeli($data_detail_beli);
             $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible text-center fade show" role="alert">Berhasil Beli<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>');
-            redirect('Beli');
+            redirect('detail_beli/pdf/' . $data_beli['nofak']);
         }
     }
 }

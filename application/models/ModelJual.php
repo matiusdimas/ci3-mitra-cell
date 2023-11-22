@@ -24,9 +24,14 @@ class ModelJual extends CI_Model
     {
         return $this->db->insert('jual', $data);
     }
-    public function getDetailJual($where)
-    {
-        return $this->db->get_where('detail_jual', $where)->result_array();
+    public function getDetailJual($where, $in=null)
+    {   
+        if ($in){
+            $this->db->where_in('jual_nofak', $where);
+        return $this->db->get('detail_jual')->result_array();
+        } else {
+            return $this->db->get_where('detail_jual', $where)->result_array();
+        }
     }
     public function addDetailJual($data)
     {
