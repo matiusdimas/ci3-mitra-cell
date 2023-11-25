@@ -21,7 +21,7 @@
         <div class="">
             <div class="">
                 <div class="">
-                    <table id="example" class="" style="width: 100%">
+                    <table id="example" class="table" style="width: 100%">
                         <thead>
                             <tr>
                                 <th>Barang Kode</th>
@@ -57,7 +57,7 @@
         <div class="d-flex justify-content-end mt-4 me-5">
             <div class="d-flex gap-3">
                 <div class="d-grid gap-2">
-                    <table id="example" class="" style="width: 100%">
+                    <table id="example" class="table" style="width: 100%">
                         <thead>
                             <tr>
                                 <th>Total Harga</th>
@@ -93,5 +93,8 @@
         </div>
     </div>
 </body>
+<script>
+    window.print();
+</script>
 
 </html>

@@ -38,4 +38,10 @@ class ModelBeli extends CI_Model
     {
         return $this->db->insert_batch('detail_beli', $data);
     }
+
+    public function getTahun($data)
+    {
+        $this->db->select('createdAt');
+        return $this->db->get_where('beli', $data);
+    }
 }

@@ -13,6 +13,41 @@
                 <h4>Penjualan</h4>
             </div>
         </div>
+        <div class="row align-items-end mb-3">
+            <div class="col-3">
+                <label for="tahun" class="form-label">Pilih Tahun</label>
+                <select class="form-select" id="tahun" aria-label="Default select example">
+                    <option value="0">Semua Tahun</option>
+                    <?php foreach ($tahun as $t) { ?>
+                        <?php if (isset($tahun_query) && $tahun_query === $t) { ?>
+                            <option value="<?= $t ?>" selected><?= $tahun_query ?></option>
+                        <?php } else { ?>
+                            <option value="<?= $t ?>"><?= $t ?></option>
+                        <?php }
+                    } ?>
+                </select>
+            </div>
+            <div class="col-3">
+                <label for="bulan" class="form-label">Pilih Bulan</label>
+                <select class="form-select" id="bulan" aria-label="Default select example">
+                    <option value="0">Semua Bulan</option>
+                    <?php foreach ($bulan as $b) { ?>
+                        <?php if (isset($bulan_query) && $bulan_query === $b) { ?>
+                            <option value="<?= $b ?>" selected><?= date('F', mktime(0, 0, 0, $b, 1)) ?></option>
+                        <?php } else { ?>
+                            <option value="<?= $b ?>"><?= date('F', mktime(0, 0, 0, $b, 1)) ?></option>
+                        <?php }
+                    } ?>
+                </select>
+            </div>
+            <?php if (isset($tahun_query)) { ?>
+                <div class="col-3">
+                    <a href="detail_jual/laporanPdf/<?= $tahun_query . '/' . $bulan_query ?>" target="_blank"
+                        class="btn btn-success"><i class="bi bi-printer-fill"></i>
+                        Print</a>
+                </div>
+            <?php } ?>
+        </div>
         <div class="card">
             <div class="card-header">
                 <span><i class="bi bi-table me-2"></i></span> Data Penjualan
@@ -45,7 +80,8 @@
                                         <a href="detail_jual/detail/<?= $j['nofak'] ?>" class="btn btn-primary mb-1"><i
                                                 class="bi bi-list-ol"></i>
                                             Detail</a>
-                                        <a target="_blank" href="<?= base_url('detail_jual/pdf/' . $j['nofak']) ?>" class="btn btn-success mb-1"><i class="bi bi-printer-fill"></i>
+                                        <a target="_blank" href="<?= base_url('detail_jual/pdf/' . $j['nofak']) ?>"
+                                            class="btn btn-success mb-1"><i class="bi bi-printer-fill"></i>
                                             Print</a>
                                     </td>
                                 </tr>
@@ -57,3 +93,29 @@
         </div>
     </div>
 </main>
+<script>
+    $('#tahun, #bulan').on('change', function () {
+        var selectedTahun = $('#tahun').val();
+        var selectedBulan = $('#bulan').val();
+
+        var baseUrl = window.location.href.split('?')[0]; // Mengambil bagian sebelum tanda '?'
+        var queryParams = {};
+
+        if (selectedTahun && selectedTahun !== '0') {
+            queryParams['tahun'] = selectedTahun;
+        }
+        if (selectedBulan && selectedBulan !== '0') {
+            queryParams['bulan'] = selectedBulan;
+        }
+
+        var queryString = $.param(queryParams); // Mengubah objek menjadi string query
+
+        var finalUrl = baseUrl;
+        if (queryString !== '') {
+            finalUrl += '?' + queryString;
+        }
+
+        window.location.href = finalUrl;
+    });
+
+</script>

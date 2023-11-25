@@ -24,11 +24,11 @@ class ModelJual extends CI_Model
     {
         return $this->db->insert('jual', $data);
     }
-    public function getDetailJual($where, $in=null)
-    {   
-        if ($in){
+    public function getDetailJual($where, $in = null)
+    {
+        if ($in) {
             $this->db->where_in('jual_nofak', $where);
-        return $this->db->get('detail_jual')->result_array();
+            return $this->db->get('detail_jual')->result_array();
         } else {
             return $this->db->get_where('detail_jual', $where)->result_array();
         }
@@ -36,5 +36,11 @@ class ModelJual extends CI_Model
     public function addDetailJual($data)
     {
         return $this->db->insert_batch('detail_jual', $data);
+    }
+
+    public function getTahun($data)
+    {
+        $this->db->select('createdAt');
+        return $this->db->get_where('jual', $data);
     }
 }

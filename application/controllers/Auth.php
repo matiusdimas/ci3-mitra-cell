@@ -33,16 +33,13 @@ class Auth extends CI_Controller
     }
     private function _login()
     {
-        $username = htmlspecialchars(
-            $this->input->post(
-                'username',
-                true
-            )
-        );
-        $password = $this->input->post('password', true);
-        $user = $this->ModelUser->cekData(['username' => $username, 'password' => $password])->row_array();
-        //jika usernya ada
-        if ($user) {
+        $username = $this->security->xss_clean($this->input->post('username'));
+        $password = $this->input->post('password');
+
+        // Melakukan query untuk mencari user berdasarkan username
+        $user = $this->ModelUser->cekData(['username' => $username])->row_array();
+
+        if ($user && password_verify($password, $user['password'])) {
             $data = [
                 'username' => $user['username'],
                 'role' => $user['role']
@@ -50,13 +47,15 @@ class Auth extends CI_Controller
             $this->session->set_userdata($data);
             redirect('dashboard');
         } else {
-            $this->session->set_flashdata('pesan', '<div
-            class="alert alert-danger alert-message" role="alert">Username Atau Password Salah</div>');
+            $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-message" role="alert">Username atau Password salah</div>');
             redirect('/');
         }
     }
 
-    public function logout (){
+
+
+    public function logout()
+    {
         $this->session->unset_userdata('username');
         $this->session->unset_userdata('role');
         redirect('/');

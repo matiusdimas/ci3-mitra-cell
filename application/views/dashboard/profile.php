@@ -20,8 +20,8 @@
                     <input type="text" class="form-control" id="username" name="username" value="<?= $p['username'] ?>">
                 </div>
                 <div class="col-auto col-md-4">
-                    <label for="password">Password</label>
-                    <input type="text" class="form-control" id="password" name="password" value="<?= $p['password'] ?>">
+                    <label for="password">New Password</label>
+                    <input type="text" class="form-control" id="password" name="password" placeholder="Input New Password">
                 </div>
                 <div>
                     <button type="submit" class="btn btn-primary">Save</button>

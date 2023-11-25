@@ -45,9 +45,10 @@ class Profile extends CI_Controller
         if ($this->form_validation->run() != true) {
             $this->index();
         } else {
+            $hash_password = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
             $data = [
                 'username' => $username_new,
-                'password' => $this->input->post('password')
+                'password' => $hash_password,
             ];
             $this->session->set_userdata(['username' => $username_new]);
             $this->ModelUser->updateUser($data, ['user_id' => $getId->user_id]);

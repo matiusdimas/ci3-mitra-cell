@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2023 at 11:14 AM
+-- Generation Time: Nov 25, 2023 at 08:18 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -45,8 +45,9 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`kode`, `nama`, `harpok`, `harjul`, `stok`, `kategori_id`, `user_id`, `createdAt`, `user_id_last_updated`, `updatedAt`) VALUES
-('BR-IP290', 'Iphone 12s', 0, 0, 0, 3, 7, '2023-11-18 16:03:34', NULL, NULL),
-('BR-IP835', 'Iphone 13s', 0, 10000000, 25, 3, 7, '2023-11-17 23:37:39', 7, '2023-11-18 10:50:13');
+('BR-IP835', 'Iphone 12', 20000000, 24000000, 0, 3, 7, '2023-11-21 19:46:23', 7, '2023-11-21 13:50:50'),
+('BR_IP22', 'Iphone 12asd', 4000000, 4800000, 0, 3, 7, '2023-11-21 20:02:25', 7, '2023-11-21 14:02:48'),
+('BR_IP835s', 'Iphone 13', 14250000, 17100000, 0, 3, 7, '2023-11-21 19:46:33', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -67,8 +68,11 @@ CREATE TABLE `beli` (
 --
 
 INSERT INTO `beli` (`nofak`, `createdAt`, `supplier_kode`, `user_id`, `total`) VALUES
-('B20231118103021SUP-MT37', '2023-11-18 10:30:21', 'SUP-MT3', 7, 80000000),
-('B20231118105506SUP-PIs97', '2023-11-18 10:55:06', 'SUP-PIs9', 7, 280000000);
+('B20231121140023SUP-MT37', '2023-11-21 14:00:23', 'SUP-MT3', 7, 320000000),
+('B20231121140121SUP-CI907', '2023-11-21 14:01:21', 'SUP-CI90', 7, 750000000),
+('B20231121140311SUP-CI907', '2023-11-21 14:03:11', 'SUP-CI90', 7, 450000000),
+('B20231121152054SUP-CI907', '2023-11-21 15:20:54', 'SUP-CI90', 7, 400000000),
+('B20231125080528SUP-PIs97', '2023-11-25 08:05:28', 'SUP-PIs9', 7, 142500000);
 
 -- --------------------------------------------------------
 
@@ -91,8 +95,14 @@ CREATE TABLE `detail_beli` (
 --
 
 INSERT INTO `detail_beli` (`id`, `beli_nofak`, `barang_kode`, `nama`, `harga`, `jumlah`, `total`) VALUES
-(4, 'B20231118103021SUP-MT37', 'BR-IP835', 'Iphone 13s', 8000000, 10, 80000000),
-(5, 'B20231118105506SUP-PIs97', 'BR-IP835', 'Iphone 13s', 14000000, 20, 280000000);
+(1, 'B20231121140023SUP-MT37', 'BR_IP835s', 'Iphone 13', 12000000, 10, 120000000),
+(2, 'B20231121140023SUP-MT37', 'BR-IP835', 'Iphone 12', 20000000, 10, 200000000),
+(3, 'B20231121140121SUP-CI907', 'BR-IP835', 'Iphone 12', 30000000, 10, 300000000),
+(4, 'B20231121140121SUP-CI907', 'BR_IP835s', 'Iphone 13', 15000000, 30, 450000000),
+(5, 'B20231121140311SUP-CI907', 'BR-IP835', 'Iphone 12', 25000000, 10, 250000000),
+(6, 'B20231121140311SUP-CI907', 'BR_IP22', 'Iphone 12asd', 4000000, 50, 200000000),
+(7, 'B20231121152054SUP-CI907', 'BR-IP835', 'Iphone 12', 20000000, 20, 400000000),
+(9, 'B20231125080528SUP-PIs97', 'BR_IP835s', 'Iphone 13', 14250000, 10, 142500000);
 
 -- --------------------------------------------------------
 
@@ -117,9 +127,11 @@ CREATE TABLE `detail_jual` (
 --
 
 INSERT INTO `detail_jual` (`id`, `jual_nofak`, `barang_kode`, `nama`, `harpok`, `harjul`, `qty`, `diskon`, `total`) VALUES
-(1, '202311180956189', NULL, 'Iphone 12', 10000000, 12000000, 1, 0, 12000000),
-(2, '202311181000347', NULL, 'Iphone 12', 10000000, 12000000, 27, 0, 324000000),
-(3, '202311181032187', 'BR-IP835', 'Iphone 13s', 0, 10000000, 5, 25, 37500000);
+(1, '202311211407037', 'BR-IP835', 'Iphone 12', 25000000, 30000000, 30, 0, 900000000),
+(2, '202311211407037', 'BR_IP22', 'Iphone 12asd', 4000000, 4800000, 50, 0, 240000000),
+(3, '202311211407037', 'BR_IP835s', 'Iphone 13', 14250000, 17100000, 40, 0, 684000000),
+(4, '202311211522177', 'BR-IP835', 'Iphone 12', 20000000, 24000000, 20, 0, 480000000),
+(5, '202311250807237', 'BR_IP835s', 'Iphone 13', 14250000, 17100000, 10, 0, 171000000);
 
 -- --------------------------------------------------------
 
@@ -141,9 +153,9 @@ CREATE TABLE `jual` (
 --
 
 INSERT INTO `jual` (`nofak`, `createdAt`, `total`, `jml_uang`, `kembalian`, `user_id`) VALUES
-('202311180956189', '2023-11-18 15:56:18', 12000000, 12500000, 500000, 9),
-('202311181000347', '2023-11-18 16:00:34', 324000000, 400000000, 76000000, 7),
-('202311181032187', '2023-11-18 16:32:18', 37500000, 40000000, 2500000, 7);
+('202311211407037', '2023-11-21 20:07:03', 1824000000, 2000000000, 176000000, 7),
+('202311211522177', '2023-11-21 21:22:17', 480000000, 480000000, 0, 7),
+('202311250807237', '2023-11-25 14:07:23', 171000000, 171000000, 0, 7);
 
 -- --------------------------------------------------------
 
@@ -162,8 +174,8 @@ CREATE TABLE `kategori` (
 
 INSERT INTO `kategori` (`id`, `kategori_nama`) VALUES
 (2, 'OPPO'),
-(3, 'Iphoness'),
-(4, 'Xiamo');
+(3, 'Iphone'),
+(4, 'Xiaomi');
 
 -- --------------------------------------------------------
 
@@ -188,7 +200,8 @@ CREATE TABLE `staff` (
 INSERT INTO `staff` (`id`, `nama`, `no_ktp`, `alamat`, `no_hp`, `createdAt`, `updatedAt`) VALUES
 (1, 'matius', '3172138024421', 'bekasi', '0891111', '2023-11-09', NULL),
 (4, 'tiuss', '317819830123', 'bekasi', '08213712312', '2023-11-15', '2023-11-17'),
-(5, 'panjuls', '098098092890', 'bekasi', '879182102', '2023-11-15', '2023-11-17');
+(5, 'panjuls', '098098092890', 'bekasi', '879182102', '2023-11-15', '2023-11-17'),
+(6, 'udin', '317123791389', 'bekasi', '082136713683', '2023-11-25', NULL);
 
 -- --------------------------------------------------------
 
@@ -212,7 +225,7 @@ CREATE TABLE `supplier` (
 
 INSERT INTO `supplier` (`kode`, `nama`, `alamat`, `no_telp`, `user_id`, `createdAt`, `updatedAt`) VALUES
 ('SUP-CI90', 'PT. Cemerlang Indo', 'lubang buaya', '0899012', 3, '2023-11-14 13:47:35', '2023-11-14 08:28:48'),
-('SUP-MT3', 'PT. Matahari Rakyat Besa', 'JAtinegara', '08999912', 3, '2023-11-14 14:28:17', '2023-11-14 08:28:57'),
+('SUP-MT3', 'PT. Matahari Rakyat Besa', 'Jatinegara', '08999912', 3, '2023-11-14 14:28:17', '2023-11-25 08:01:37'),
 ('SUP-PIs9', 'PT. Matahari Updated', 'bekasi', '0899999', 7, '2023-11-17 23:39:51', NULL);
 
 -- --------------------------------------------------------
@@ -234,9 +247,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `role`, `staff_id`) VALUES
-(3, 'admins', 'admin', 'ADMIN', 1),
-(7, 'tius', 'tius', 'ADMIN', 4),
-(9, 'dimas', 'mitra123', 'STAFF', 5);
+(3, 'admins', '$2y$10$QdkpxmlgsCXFg/61sgAKDOrX9dLrrTfenhqgef/CEbCQTWXDB8Ptu', 'ADMIN', 1),
+(7, 'admin', '$2y$10$UyQNbT5VohQ2deF4l38t6.k/sgB14nqYSkil29b56EbabXGZEhmlW', 'ADMIN', 4),
+(9, 'dimas', '$2y$10$EWUqOagflm/ff7Fd.UT3GuT/oa0tp6whdMW5FCqEaZDhLByplAUBK', 'STAFF', 5),
+(10, 'udin', '$2y$10$ZbdMhvuX3CdXXUTYGcdek.pghWk9L.rx/P8Nfy12vI703chHi7mCC', 'STAFF', 6);
 
 --
 -- Indexes for dumped tables
@@ -319,13 +333,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `detail_beli`
 --
 ALTER TABLE `detail_beli`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `detail_jual`
 --
 ALTER TABLE `detail_jual`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -337,13 +351,13 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables

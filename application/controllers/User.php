@@ -67,9 +67,11 @@ class User extends CI_Controller
         if ($this->form_validation->run() != true) {
             $this->index();
         } else {
+            $password = $this->input->post('password');
+            $hash_password = password_hash($password, PASSWORD_BCRYPT);
             $data = [
                 'username' => $this->input->post('username'),
-                'password' => $this->input->post('password'),
+                'password' => $hash_password,
                 'role' => $this->input->post('role'),
                 'staff_id' => $this->input->post('staffId'),
             ];
@@ -81,7 +83,8 @@ class User extends CI_Controller
     }
     public function resetUser($id)
     {
-        $this->ModelUser->updateUser(['password' => 'mitra123'], ['user_id' => $id]);
+        $hash_password = password_hash('mitra123', PASSWORD_BCRYPT);
+        $this->ModelUser->updateUser(['password' => $hash_password], ['user_id' => $id]);
         $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible text-center fade show" role="alert">Berhasil Reset Password<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>');
         redirect('User');

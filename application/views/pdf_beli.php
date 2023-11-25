@@ -22,7 +22,7 @@
         <div class="">
             <div class="">
                 <div class="">
-                    <table id="example" class="" style="width: 100%">
+                    <table id="example" class="table" style="width: 100%">
                         <thead>
                             <tr>
                                 <th>Barang Kode</th>
@@ -84,5 +84,8 @@
         </div>
     </div>
 </body>
+<script>
+    window.print();
+</script>
 
 </html>
