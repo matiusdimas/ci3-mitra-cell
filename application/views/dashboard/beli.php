@@ -91,7 +91,7 @@
                 </div>
             </div>
         </div>
-        <form id="formbeli" action="<?= base_url('beli/addBeli') ?>" method="post" target="_blank">
+        <form id="formbeli" action="<?= base_url('beli/addBeli') ?>" method="post">
             <div class="card">
                 <div class="card-header">
                     <span><i class="bi bi-table me-2"></i></span> Data Beli
@@ -155,5 +155,10 @@
 <script>
     var barangData = <?php echo json_encode($barang); ?>;
     var supplierData = <?php echo json_encode($supplier); ?>;
+    <?php if ($this->session->flashdata('pdf')) { ?>
+        window.onload = function () {
+            window.open('<?php echo base_url($this->session->flashdata('pdf')); ?>', '_blank');
+        };
+    <?php } ?>
 </script>
 <script src="<?= base_url('assets/js/dashboard/beli.js?v=3') ?>"></script>

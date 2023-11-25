@@ -121,9 +121,10 @@ class Beli extends CI_Controller
             $this->ModelBarang->updateBarangBatch($data_stok);
             $this->ModelBeli->addBeli($data_beli);
             $this->ModelBeli->addDetailBeli($data_detail_beli);
+            $this->session->set_flashdata('pdf', 'detail_beli/pdf/' . $data_beli['nofak']);
             $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible text-center fade show" role="alert">Berhasil Beli<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>');
-            redirect('detail_beli/pdf/' . $data_beli['nofak']);
+                    </div>');
+            redirect('beli');
         }
     }
 }

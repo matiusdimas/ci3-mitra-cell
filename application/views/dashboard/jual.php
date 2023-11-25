@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <form id="formJual" action="<?= base_url('jual/addJual') ?>" method="post" target="_blank">
+        <form id="formJual" action="<?= base_url('jual/addJual') ?>" method="post">
             <div class="card">
                 <div class="card-header">
                     <span><i class="bi bi-table me-2"></i></span> Data Jual
@@ -159,6 +159,11 @@
     </div>
 </main>
 <script>
-    var barangData = <?php echo json_encode($barang); ?>
+    var barangData = <?php echo json_encode($barang); ?>;
+    <?php if ($this->session->flashdata('pdf')) { ?>
+        window.onload = function () {
+            window.open('<?php echo base_url($this->session->flashdata('pdf')); ?>', '_blank');
+        };
+    <?php } ?>
 </script>
-<script src="<?= base_url('assets/js/dashboard/jual.js?v=19') ?>"></script>
+<script src="<?= base_url('assets/js/dashboard/jual.js?v=21') ?>"></script>
