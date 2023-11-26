@@ -50,33 +50,12 @@ class Dashboard extends CI_Controller
         foreach ($data['detail_beli'] as $item) {
             $data['totalQtyBeli'] += (int) $item['jumlah'];
         }
+
+        $data['chart_jual'] = $this->ModelJual->getJual();
+        $data['chart_beli'] = $this->ModelBeli->getBeli();
         $this->load->view('templates/header', $data);
         $this->load->view('dashboard/index', $data);
         $this->load->view('templates/footer');
     }
 
-    public function coba()
-    {
-        // $data['jual'] = $this->ModelJual->getWhereJual([
-        //     'MONTH(createdAt)' => date('m'),
-        //     'YEAR(createdAt)' => date('Y'),
-        // ]);
-        // $nofakArray = [];
-        // $data['totalPenjualan'] = 0;
-        // foreach ($data['jual'] as $jual) {
-        //     $data['totalPenjualan'] += (int) $jual['total'];
-        //     $nofakArray[] = $jual['nofak'];
-        // }
-        // $data['detail_jual'] = $this->ModelJual->getDetailJual($nofakArray, 'in');
-        // $data['total_penjualan'] = $data['totalPenjualan'];
-        // $data['jumlahData'] = count($data['jual']);
-        // $data['totalQty'] = 0;
-        // foreach ($data['detail_jual'] as $item) {
-        //     $data['totalQty'] += (int) $item['qty'];
-        // }
-        // $this->load->view('dashboard/coba', $data);
-        // Dalam view atau file tampilan CodeIgniter
-        redirect("controller/method", 'Tautan ke Halaman Baru', ['target' => '_blank']);
-
-    }
 }

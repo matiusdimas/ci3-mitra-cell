@@ -41,10 +41,10 @@
                 <div class="card h-100">
                     <div class="card-header">
                         <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                        Area Chart Example
+                        Grafik Penjualan
                     </div>
                     <div class="card-body">
-                        <canvas class="chart" width="400" height="200"></canvas>
+                        <canvas id="chart-jual" width="400" height="200"></canvas>
                     </div>
                 </div>
             </div>
@@ -52,13 +52,129 @@
                 <div class="card h-100">
                     <div class="card-header">
                         <span class="me-2"><i class="bi bi-bar-chart-fill"></i></span>
-                        Area Chart Example
+                        Grafik Pembelian
                     </div>
                     <div class="card-body">
-                        <canvas class="" width="400" height="200"></canvas>
+                        <canvas id="chart-beli" width="400" height="200"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript">
+    function jual() {
+        const dataJual = <?= json_encode($chart_jual); ?>;
+        const dataBeli = <?= json_encode($chart_beli); ?>;
+        const mappedData = dataJual.map(item => ({
+            createdAt: new Date(item.createdAt),
+            total: parseInt(item.total)
+        }));
+
+        const yearMonthTotals = mappedData.reduce((acc, item) => {
+            const year = item.createdAt.getFullYear();
+            const month = item.createdAt.getMonth() + 1; // Bulan dimulai dari 0
+            const yearMonth = `${year}-${month}`;
+
+            if (!acc[yearMonth]) {
+                acc[yearMonth] = 0;
+            }
+
+            acc[yearMonth] += item.total;
+
+            return acc;
+        }, {});
+        const yearMonthArray = Object.entries(yearMonthTotals).map(([yearMonth, total]) => ({
+            tahun: yearMonth,
+            total: total
+        }));
+
+        yearMonthArray.sort((a, b) => {
+            const [yearA, monthA] = a.tahun.split('-');
+            const [yearB, monthB] = b.tahun.split('-');
+            if (yearA !== yearB) {
+                return yearA - yearB;
+            }
+            return monthA - monthB;
+        });
+
+        new Chart(document.getElementById("chart-jual"), {
+            type: 'line',
+            data: {
+                labels: yearMonthArray.map(d => d.tahun),
+                datasets: [
+                    {
+                        label: "Total Penjualan",
+                        data: yearMonthArray.map(d => d.total)
+                    }
+                ]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Predicted world population (millions) in 2050'
+                }
+            }
+        });
+    }
+    jual()
+
+    function beli() {
+        const dataBeli = <?= json_encode($chart_beli); ?>;
+        const mappedData = dataBeli.map(item => ({
+            createdAt: new Date(item.createdAt),
+            total: parseInt(item.total)
+        }));
+
+        const yearMonthTotals = mappedData.reduce((acc, item) => {
+            const year = item.createdAt.getFullYear();
+            const month = item.createdAt.getMonth() + 1; // Bulan dimulai dari 0
+            const yearMonth = `${year}-${month}`;
+
+            if (!acc[yearMonth]) {
+                acc[yearMonth] = 0;
+            }
+
+            acc[yearMonth] += item.total;
+
+            return acc;
+        }, {});
+        const yearMonthArray = Object.entries(yearMonthTotals).map(([yearMonth, total]) => ({
+            tahun: yearMonth,
+            total: total
+        }));
+
+        yearMonthArray.sort((a, b) => {
+            const [yearA, monthA] = a.tahun.split('-');
+            const [yearB, monthB] = b.tahun.split('-');
+            if (yearA !== yearB) {
+                return yearA - yearB;
+            }
+            return monthA - monthB;
+        });
+
+        new Chart(document.getElementById("chart-beli"), {
+            type: 'line',
+            data: {
+                labels: yearMonthArray.map(d => d.tahun),
+                datasets: [
+                    {
+                        label: "Total Pembelian",
+                        data: yearMonthArray.map(d => d.total),
+                        borderColor: '##93C3D2',
+                    }
+                ]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Predicted world population (millions) in 2050'
+                }
+            }
+        });
+    }
+    beli()
+</script>
